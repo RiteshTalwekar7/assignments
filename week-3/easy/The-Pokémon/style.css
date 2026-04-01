@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  /* horizontal center */
+  align-items: center;
+  /* vertical center */
+}
+
+.Card-Holder {
+  display: flex;
+  gap: 10px;
+  /* space between input and button */
+  margin-bottom: 20px;
+}
+
+.Card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
