@@ -37,27 +37,28 @@ function calculateTotalSpentByCategory(transactions) {
   })
   return Category_TotalSpent;
 }
-console.log(calculateTotalSpentByCategory([{
-  id: 1,
-  timestamp: 1656076800000,
-  price: 10,
-  category: 'Food',
-  itemName: 'Pizza',
-}, {
-  id: 2,
-  timestamp: 1656076800000,
-  price: 10,
-  category: 'Food',
-  itemName: 'Pizza',
-}, {
-  id: 3,
-  timestamp: 1656076800000,
-  price: 10,
-  category: 'Food',
-  itemName: 'Pizza',
-}]));
+// console.log(calculateTotalSpentByCategory([{
+//   id: 1,
+//   timestamp: 1656076800000,
+//   price: 10,
+//   category: 'Food',
+//   itemName: 'Pizza',
+// }, {
+//   id: 2,
+//   timestamp: 1656076800000,
+//   price: 10,
+//   category: 'Food',
+//   itemName: 'Pizza',
+// }, {
+//   id: 3,
+//   timestamp: 1656076800000,
+//   price: 10,
+//   category: 'Food',
+//   itemName: 'Pizza',
+// }]));
 module.exports = calculateTotalSpentByCategory;
 
+// Mistakes to avoid :- 
 
 // const IndexForChange = Category_TotalSpent.findIndex((obj) => {
 //   obj.category == transaction.category;
