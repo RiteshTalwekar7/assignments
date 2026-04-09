@@ -3,23 +3,40 @@
 const express = require('express');
 const app = express();
 
-let count = 0;
 let numberOfRequestsForUser = {};
 setInterval(() => {
   numberOfRequestsForUser = {};
-}, 1000)
+}, 500)
 app.use(function RateLimiterMiddleware(req, res, next) {
-  numberOfRequestsForUser.id = req.headers['user-id'];
-  if (numberOfRequestsForUser.id = req.headers['user-id']) {
-    if (count > 5) {
-      res.status(404).json({
-        user: "You have been blocked."
-      })
-    } else {
-      count++;
-      next();
-    }
+  const userId = req.header('user-id');
+
+  if (!userId) {
+    return res.status(400).json({ error: 'user-id is required' });
   }
+
+  const currentTime = Math.floor(Date.now() / 1000); // Current second timestamp
+
+  // Initialize user data if not already present
+  if (!numberOfRequestsForUser[userId]) {
+    numberOfRequestsForUser[userId] = { count: 0, lastRequestTime: currentTime };
+  }
+
+  const userData = numberOfRequestsForUser[userId];
+
+  if (currentTime === userData.lastRequestTime) {
+    userData.count += 1;
+  } else {
+    userData.count = 1;
+    userData.lastRequestTime = currentTime;
+  }
+
+  // Limit to 5 requests per second
+  if (userData.count > 5) {
+    return res.status(404).json({ error: 'Too many requests' });
+  }
+
+  // Continue to next middleware/route handler
+  next();
 })
 
 // Your task is to create a global middleware (app.use) which will
